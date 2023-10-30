@@ -1,0 +1,140 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Homepage</title>
+  <style>
+    /* Style the user's name */
+    b {
+        font-size: 18px;
+        color: #333;
+        margin-top: 10px;
+        display: block;
+    }
+    
+    /* Reset some default styles */
+    * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+    }
+    
+    /* Style the navigation bar */
+    .navbar {
+        background-color: #007bff;
+        color: #fff;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        padding: 10px 0;
+    }
+    
+    .container {
+        max-width: 1200px;
+        width: 100%;
+        margin: 0 auto;
+        padding: 0 20px;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+    }
+    
+    .logo {
+        font-size: 24px;
+    }
+    
+    /* Style the navigation menu */
+    .nav-menu {
+        list-style: none;
+        display: flex;
+    }
+    
+    .nav-menu li {
+        margin-right: 20px;
+    }
+    
+    .nav-menu a {
+        text-decoration: none;
+        color: #fff;
+        font-weight: bold;
+        transition: color 0.3s;
+    }
+    
+    .nav-menu a:hover {
+        color: #ffcc00;
+    }
+
+    /* Style the page content */
+    .content {
+        max-width: 800px;
+        margin: 0 auto;
+        padding: 20px;
+    }
+    
+    .content h2 {
+        font-size: 36px;
+        margin-bottom: 10px;
+    }
+    
+    .content p {
+        font-size: 18px;
+        text-align: left;
+        margin: 20px 0; /* Add space between posts */
+        padding: 10px;
+        border: 1px solid #ddd; /* Add a border around posts */
+        background-color: #f9f9f9; /* Light gray background for posts */
+        border-radius: 5px;
+    }
+
+    /* Style the "Add Post" button */
+    .add-post-button {
+        position: fixed;
+        bottom: 20px;
+        right: 20px;
+        background-color: #28a745;
+        color: #fff;
+        padding: 10px 20px;
+        border-radius: 5px;
+        text-decoration: none;
+        font-size: 16px;
+        z-index: 1;
+    }
+
+    .add-post-button:hover {
+        background-color: #218838;
+    }
+  </style>
+</head>
+<body>
+    <nav class="navbar">
+        <div class="container">
+            <h1 class="logo">Blog Site</h1>
+            <ul class="nav-menu">
+                <li><a href="#">Home</a></li>
+                <li><a href="#">About</a></li>
+                <li><a href="#">Services</a></li>
+                <li><a href="#">Portfolio</a></li>
+                <li><a href="#">Contact</a></li>
+                <li><a href="{% url 'logoutpage' %}">Logout</a></li>
+            </ul>
+        </div>
+    </nav>
+    {% if user.is_authenticated %}
+   <b> Hello {{request.user}}</b>
+    {% else %}
+   <b> Hello</b>
+    {% endif %} 
+
+    <div class="content">
+        <h2>Welcome to My Blog Site</h2>
+        {% for post in posts %}
+        <div class="post">
+            <p>{{ post.content|slice:":200" }}{% if post.content|length > 200 %}...{% endif %}</p>
+            <a href="{% url 'detailpage' post.id %}">Read more</a>
+        </div>
+        {% endfor %}
+    </div>
+
+    <!-- "Add Post" button -->
+    <a class="add-post-button" href="{% url 'addpost' %}">Add Post</a>
+</body>
+</html>

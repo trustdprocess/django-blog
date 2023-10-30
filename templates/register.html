@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Registration Form</title>
+  <style>
+  
+    body {
+      font-family: Arial, sans-serif;
+      background-color: #f0f0f0;
+      margin: 0;
+      padding: 0;
+    }
+
+  
+    form {
+      max-width: 1000px; /* You can adjust this value to make it wider */
+      margin: 0 auto;
+      padding: 20px;
+      background-color: #fff;
+      border-radius: 5px;
+      box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
+    }
+    
+
+    /* Style form labels */
+    label {
+      font-weight: bold;
+    }
+
+    /* Style form inputs */
+    input[type="text"],
+    input[type="password"] {
+      width: 100%;
+      padding: 10px;
+      margin: 5px 0;
+      border: 1px solid #ccc;
+      border-radius: 3px;
+    }
+
+    /* Style form checkbox */
+    input[type="checkbox"] {
+      margin: 5px 0;
+    }
+
+    /* Style the submit button */
+    button[type="submit"] {
+      background-color: #007bff;
+      color: #fff;
+      border: none;
+      border-radius: 3px;
+      padding: 10px 20px;
+      cursor: pointer;
+    }
+
+    /* Style the submit button on hover */
+    button[type="submit"]:hover {
+      background-color: #0056b3;
+    }
+
+    /* Add some spacing between form elements */
+    .mb-3 {
+      margin-bottom: 15px;
+    }
+
+    /* Style the form text at the bottom */
+    .form-text {
+      font-size: 12px;
+      color: #777;
+    }
+
+    /* Center the form in the middle of the page */
+    html, body {
+      height: 100%;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+    }
+  </style>
+</head>
+<body>
+  <form method="POST">
+    {% csrf_token %}
+
+    {% if messages %}
+    <div class="alert alert-primary" role="alert">
+      {% for message in messages %}
+      {{ message }}
+      {% endfor %}
+     
+    </div>
+    
+
+{% endif %}
+
+    <div class="mb-3">
+      <label for="first_name" class="form-label">First Name</label>
+      <input type="text" class="form-control" name="first_name" id="first_name" aria-describedby="emailHelp">
+      <div id="emailHelp" class="form-text">We'll never share your email with anyone else.</div>
+    </div>
+    <div class="mb-3">
+      <label for="last_name" class="form-label">Last Name</label>
+      <input type="text" class="form-control" name="last_name" id="last_name" aria-describedby="emailHelp">
+      <div id="emailHelp" class="form-text">We'll never share your email with anyone else.</div>
+    </div>
+    <div class="mb-3">
+      <label for="username" class="form-label">Username</label>
+      <input type="text" class="form-control" name="username" id="username" aria-describedby="emailHelp">
+      <div id="emailHelp" class="form-text">We'll never share your email with anyone else.</div>
+    </div>
+    <div class="mb-3">
+      <label for="password" class="form-label">Password</label>
+      <input type="password" class="form-control" name="password" id="password">
+    </div>
+    <div class="mb-3 form-check">
+      <input type="checkbox" class="form-check-input" id="exampleCheck1">
+      <label class="form-check-label" for="exampleCheck1">Check me out</label>
+    </div>
+    <button type="submit" class="btn btn-primary">Submit</button>
+  <p>Already Have have an account?</p>
+  <a href="{% url 'loginpage' %}">Login</a>
+  </form>
+</body>
+</html>
